@@ -53,7 +53,22 @@
     </script>
 
     <script>
-      function login(){
+      function fazerLogin(){
+        let email = document.getElementById("email_login").value
+        let senha = document.getElementById("senha_login").value
+
+        let request = new XMLHttpRequest()
+        request.open('GET', `http://localhost:8080/usuario/email/${email}`,true)
+        request.onload = function(){
+          let usuario = JSON.parse(this.response)
+          if(usuario.senha == senha){
+            alert("Entrou no Sistema")
+          }
+          else {
+            alert("Problema com o Login/Senha")
+          }
+        }
+        request.send()
 
       }
     </script>
@@ -126,16 +141,16 @@
                     <input type="hidden" id="siteId" name="siteId" value="436644">
                     <input type="hidden" id="pageId" name="pageId" value="436720">
                     <div class="u-form-group u-form-name">
-                      <label for="name-bf1e" class="u-form-control-hidden u-label">Nome</label>
-                      <input type="text" placeholder="Insira seu email" id="name-bf1e" name="name" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="">
+                      <label for="name-bf1e" class="u-form-control-hidden u-label">Email</label>
+                      <input type="email" placeholder="Insira seu email" id="email_login" name="email_login" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="">
                     </div>
                     <div class="u-form-email u-form-group">
-                      <label for="email-bf1e" class="u-form-control-hidden u-label">Email</label>
-                      <input type="email" placeholder="Insira sua senha" id="email-bf1e" name="email" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="">
+                      <label for="email-bf1e" class="u-form-control-hidden u-label">Senha</label>
+                      <input type="password" placeholder="Insira sua senha" id="senha_login" name="senha_login" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="">
                     </div>
                     <div class="u-align-left u-form-group u-form-submit">
                       <a href="#" class="u-btn u-btn-submit u-button-style">Enviar</a>
-                      <input type="submit" value="submit" class="u-form-control-hidden">
+                      <button onclick="fazerLogin()"type="submit" value="submit" class="u-form-control-hidden"> </button>
                     </div>
                     <div class="u-form-send-message u-form-send-success"> Obrigado! A sua mensagem foi enviada. </div>
                     <div class="u-form-send-error u-form-send-message"> Não foi possível enviar a sua mensagem. Por favor, corrija os erros e tente novamente. </div>
